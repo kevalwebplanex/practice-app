@@ -18,7 +18,7 @@ use Shopify\Exception\InvalidWebhookException;
 use Shopify\Utils;
 use Shopify\Webhooks\Registry;
 use Shopify\Webhooks\Topics;
-
+use App\Http\Controllers\userController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -143,3 +143,6 @@ Route::post('/api/webhooks', function (Request $request) {
         return response()->json(['message' => "Got an exception when handling '$topic' webhook"], 500);
     }
 });
+
+// Route::get("/api/userdatas",[userController::class,"index"])->middleware('shopify.auth');
+Route::get("/api/userdata",[userController::class,"showData"]);

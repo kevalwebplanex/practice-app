@@ -13,7 +13,9 @@
   },
   "dependencies": {
     "@shopify/app": "3.47.5",
-    "@shopify/cli": "3.47.5"
+    "@shopify/cli": "3.47.5",
+    "bootstrap": "^5.3.0",
+    "react-bootstrap": "^2.8.0"
   },
   "author": "Admin",
   "private": true,

@@ -7,29 +7,30 @@ import {
   Stack,
   Link,
   Text,
+  CalloutCard,
 } from "@shopify/polaris";
 import { TitleBar } from "@shopify/app-bridge-react";
 import { useTranslation, Trans } from "react-i18next";
-
 import { trophyImage } from "../assets";
-
-import { ProductsCard } from "../components";
+import "bootstrap/dist/css/bootstrap.css";
+// import { ProductsCard } from "../components";
+import Users from "../components/Users";
 
 export default function HomePage() {
   const { t } = useTranslation();
   return (
     <Page narrowWidth>
-      <TitleBar title={t("HomePage.title")} primaryAction={null} />
+      {/* <TitleBar title={t("HomePage.title")} primaryAction={null} /> */}
       <Layout>
-        <Layout.Section>
+        {/* <Layout.Section>
           <Card sectioned>
             <Stack
               wrap={false}
               spacing="extraTight"
               distribution="trailing"
               alignment="center"
-            >
-              <Stack.Item fill>
+            > */}
+              {/* <Stack.Item fill>
                 <TextContainer spacing="loose">
                   <Text as="h2" variant="headingMd">
                     {t("HomePage.heading")}
@@ -71,8 +72,8 @@ export default function HomePage() {
                     />
                   </p>
                 </TextContainer>
-              </Stack.Item>
-              <Stack.Item>
+              </Stack.Item> */}
+              {/* <Stack.Item>
                 <div style={{ padding: "0 20px" }}>
                   <Image
                     source={trophyImage}
@@ -80,12 +81,12 @@ export default function HomePage() {
                     width={120}
                   />
                 </div>
-              </Stack.Item>
-            </Stack>
+              </Stack.Item> */}
+            {/* </Stack>
           </Card>
-        </Layout.Section>
+        </Layout.Section> */}
         <Layout.Section>
-          <ProductsCard />
+          <Users/>
         </Layout.Section>
       </Layout>
     </Page>

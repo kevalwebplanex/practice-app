@@ -4,11 +4,14 @@ import {Page, LegacyCard} from '@shopify/polaris';
 import { useAppQuery, useAuthenticatedFetch } from "../hooks";
 import Button from 'react-bootstrap/Button';
 import Loading from './Loading';
+import { useNavigate } from '@shopify/app-bridge-react';
+import Adduser from './Adduser';
+
 const Users = () => {
 
     const [isLoading, setIsLoading] = useState(true);
     const fetch = useAuthenticatedFetch();
-   
+   const navigate = useNavigate();
     
     const {
         data,
@@ -23,13 +26,25 @@ const Users = () => {
           },
         },
       });
-       const handleEdit = (id)=>{
-        console.log("edit", id);
-       }
-    const handleDelete = (id)=>{
+     
+    const handleDelete = async(id)=>{
+        const response = await fetch("/api/deleteUser",{
+            method:"POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body:JSON.stringify({
+              "id":id
+            }),
+            }).then(res=>res.json());
         console.log("delete",id);
+      
+        if(response.status){
+          console.log(response.message);
+          refetch();
+        }
     }
-    //   console.log(data?.users);
+
     if(jjj){
      return <Loading/>
     }
@@ -39,6 +54,7 @@ const Users = () => {
   return (
    
     <>
+     <Button onClick={()=>navigate("/AddUser")}>Add User</Button>
     <Page title='Users Data'>
     <LegacyCard>
         <Table striped bordered hover variant="dark" style={{overflow:"scroll"}} >
@@ -50,7 +66,7 @@ const Users = () => {
           <th>Phone</th>
           <th>City</th>
           <th>Edit</th>
-          <th>Delete</th>
+          <th>Remove</th>
         </tr>
       </thead>
       <tbody>
@@ -62,7 +78,7 @@ const Users = () => {
                 <td>{user.email}</td>
                 <td>{user.phone}</td>
                 <td>{user.city}</td>
-                <td><Button variant="primary" onClick={()=>handleEdit(user.id)}>Edit</Button></td>
+                <td><Button variant="primary" onClick={()=>navigate(`/${user.id}`)}>Edit</Button></td>
                 <td><Button variant="danger" onClick={()=>handleDelete(user.id)}>Delete</Button></td>
             </tr>
         ))}
@@ -76,17 +92,3 @@ const Users = () => {
 }
 
 export default Users
-
-    // {/* {data?.users?.map((user,key)=>{
-    //         const {id,name,email,phone} = user
-    //       return (<tr  key={key}>
-    //         <td>{id}</td>
-    //         <td>{name}</td>
-    //         <td>{email}</td>
-    //         <td>{phone}</td>
-    //         <td>{city}</td>
-    //         {/* <td>{city}</td> */}
-    //         </tr>) 
-            
-        
-    //     })} */}

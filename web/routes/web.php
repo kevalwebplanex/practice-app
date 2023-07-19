@@ -144,5 +144,10 @@ Route::post('/api/webhooks', function (Request $request) {
     }
 });
 
-// Route::get("/api/userdatas",[userController::class,"index"])->middleware('shopify.auth');
-Route::get("/api/userdata",[userController::class,"showData"]);
+// Route::get("/api/userdatas",[userController::class,"index"]);
+Route::get("/api/userdata",[userController::class,"showData"])->middleware('shopify.auth');
+Route::post("/api/deleteUser",[userController::class,"deleteUser"])->middleware('shopify.auth');
+Route::post("/api/addUser",[userController::class,"addUser"])->middleware('shopify.auth');
+Route::post("/api/user",[userController::class,"getUser"])->middleware('shopify.auth');
+Route::post("/api/edituser",[userController::class,"editUser"])->middleware('shopify.auth');
+
